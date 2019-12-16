@@ -139,9 +139,6 @@ NAWIGACJA
     letter-spacing: 6.7px;
 }
 
-.page__hamburger-menu {
-    display: none;
-}
 /*
 ######################################
 LINKI DO SOCIAL MEDIA
@@ -301,6 +298,38 @@ SEKCJA "PHOTOS"
 ######################################
 */
 
+@keyframes photo-animation {
+	0% {
+        transform: scale(1);
+    }
+    
+    20%{
+        transform: scale(1.2) rotate(10deg);
+    }
+
+	100% {
+        transform: scale(1) rotate(0deg);
+	}
+}
+
+@keyframes quiting {
+    0% {
+        filter: brightness(100%) grayscale(0%);
+    }
+
+    10% {
+        filter: brightness(40%) grayscale(90%);
+    }
+
+    80% {
+        filter: brightness(90%) grayscale(40%);;
+    }
+
+    100% {
+        filter: brightness(100%) grayscale(0%);
+    }
+}
+
 .gallery {
     display: flex;
     flex-wrap: wrap;
@@ -317,6 +346,14 @@ SEKCJA "PHOTOS"
 .gallery__image {
     width: 100%;
     border-top: 3px solid #EF008E;
+    animation: quiting 4s ease;
+}
+
+.gallery__image:hover{
+    animation-name: photo-animation;
+    animation-duration: 5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
 }
 
 @supports (display: grid) {
@@ -359,6 +396,10 @@ SEKCJA "CONTACT"
 .contact__form {
     flex-basis: 50%;
     padding-top: 40px;
+}
+
+.menu-button {
+    display: none;
 }
 
 
@@ -423,18 +464,6 @@ SEKCJA "CONTACT"
 
     .page-navigation__items {
         text-align: center;
-    }
-
-    .page-navigation{
-		display: none;
-	}
-
-	.page-navigation.hamburger{
-		display: block;
-	}
-
-    .page__hamburger-menu {
-        display: block;
     }
 
     /*
@@ -619,5 +648,45 @@ SEKCJA "CONTACT"
         padding: 0;
         line-height: 1.77;
     }
-}
 
+    .menu-button {
+        background: none;
+        border-style: none;
+        border: 0px;
+        outline: none;
+        display: block;
+        width: 100px;
+    }
+
+    .first_bar, .second_bar, .third_bar{
+        display: block;
+        border: 3px solid;
+        color: #EF008E;
+        margin: 7px;
+        transition: 0.55s;
+    }
+
+    .first_bar.bar--visible{
+        transition: 1s 0.5s;
+        width: 70%;
+        transform: rotate(40deg) translate(5px, 10px);
+    }
+
+    .second_bar.bar--visible{
+        filter: opacity(0);
+    }
+
+    .third_bar.bar--visible{
+        transition: 1s 0.5s;
+        width: 70%;
+        transform: rotate(-400deg) translate(7px, -13px);
+    }
+
+    .page-navigation {
+        display: none;
+    }
+
+    .page-navigation--visible {
+        display: block;
+    }
+}
